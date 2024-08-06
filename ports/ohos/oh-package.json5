@@ -1,0 +1,11 @@
+{
+  "name": "jk_core_question",
+  "version": "1.0.0",
+  "description": "jiakaobaodian cross-mobile core logic",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "jk_core_question.so": "file:./types/index.d.ts"
+  }
+}

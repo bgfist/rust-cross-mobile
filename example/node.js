@@ -1,7 +1,12 @@
-const { Question, QuestionDb } = require('./libjk_core_question.node');
+const path = require('path');
+const { Question, QuestionDb } = require('./index.node');
 
-const db = new QuestionDb('./car.db');
+console.log(111, Question, QuestionDb);
+const db = new QuestionDb(path.join(__dirname, './car.db'));
 console.log(db);
 const [q] = db.getQuestions();
 
-console.log(Question.prototype, q.question);
+db.close();
+const q2 = db.getQuestionById(301976);
+
+console.log(Question.prototype, q.question, q.id, q2);

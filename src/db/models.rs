@@ -4,7 +4,8 @@ use diesel::prelude::*;
 use diesel::sql_types::{Binary, Nullable};
 use napi_derive::napi;
 
-#[cfg_attr(any(target_env = "ohos", target_os = "macos"), napi)]
+#[cfg_attr(ffi_uniffi, derive(uniffi::Record))]
+#[napi]
 #[derive(Queryable, Selectable, Debug)]
 #[diesel(table_name = super::schema::t_question)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
