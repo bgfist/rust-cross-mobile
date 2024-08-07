@@ -11,12 +11,27 @@ name = "uniffi_bindgen"
 crate-type = ["staticlib", "cdylib"]
 
 [lints.rust]
-unexpected_cfgs = { level = "allow", check-cfg = ['cfg(ffi_uniffi)', 'cfg(ffi_napi)'] }
+unexpected_cfgs = { level = "allow", check-cfg = [
+    'cfg(ffi_uniffi)',
+    'cfg(ffi_napi)',
+] }
+
+[profile.release]
+strip = true
+lto = true
+opt-level = "z"
+# codegen-units = 1
+# panic = "abort"
 
 [dependencies]
 diesel = { version = "2.1.6", features = ["sqlite", "64-column-tables"] }
-libsqlite3-sys = { version = "0.28.0", features = ["bundled"] }
 uniffi = { version = "0.28.0", features = ["cli"] }
+
+[target.'cfg(target_os="ios")'.dependencies]
+libsqlite3-sys = { version = "0.28.0" }
+
+[target.'cfg(not(target_os="ios"))'.dependencies]
+libsqlite3-sys = { version = "0.28.0", features = ["bundled"] }
 
 [target.'cfg(not(target_env="ohos"))'.dependencies]
 napi-derive = { version = "2.16.4", features = ["noop"] }
