@@ -1,3 +1,7 @@
 /target
 /node_modules
 /package-lock.json
+libjk_core_question.a
+libjk_core_question.so
+/ports/ios/JkCoreQuestion/Sources/JkCoreQuestion/*
+/ports/ios/JkCoreQuestion/RustFramework.xcframework/*/Headers/*
