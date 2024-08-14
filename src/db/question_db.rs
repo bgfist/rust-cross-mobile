@@ -34,7 +34,7 @@ impl QuestionDb {
     }
 
     #[napi]
-    pub fn close(&self) {
+    pub fn disconnect(&self) {
         self.conn.lock().unwrap().as_mut().take();
     }
 

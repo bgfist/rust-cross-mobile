@@ -1,0 +1,4 @@
+[bindings.kotlin]
+package_name = "cn.mucang.android.jk.core.question"
+android = true
+kotlin_target_version = "1.8"

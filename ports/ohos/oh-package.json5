@@ -1,11 +1,10 @@
 {
-  "name": "jk_core_question",
-  "version": "1.0.0",
-  "description": "jiakaobaodian cross-mobile core logic",
-  "main": "",
-  "author": "",
-  "license": "",
-  "dependencies": {
-    "jk_core_question.so": "file:./types/index.d.ts"
-  }
+  license: "MIT",
+  author: "zhouwang",
+  name: "@mc/jk_core_question",
+  description: "Rust Core Question Logic for OpenHarmony",
+  main: "index.ets",
+  version: "1.0.0",
+  types: "types/index.d.ts",
+  dependencies: {}
 }
