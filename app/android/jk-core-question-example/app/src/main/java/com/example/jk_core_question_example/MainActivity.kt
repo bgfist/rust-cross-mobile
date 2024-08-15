@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,8 @@ import com.example.jk_core_question_example.ui.theme.JkcorequestionexampleTheme
 import cn.mucang.android.jk.core.question.QuestionDb
 
 class MainActivity : ComponentActivity() {
+    private lateinit var dbPath: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,15 +28,25 @@ class MainActivity : ComponentActivity() {
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
+                    Button(
+                        modifier = Modifier.padding(innerPadding),
+                        onClick = {
+                            val db = QuestionDb(dbPath)
+                            val qs = db.getQuestions()
+                            qs.forEach {
+                                println("xxxxxxxxxxx questionId:" + it.question)
+                            }
+                        }
+                    ) {
+                        Text("点击查询")
+                    }
                 }
             }
         }
 
-        val path = ""
-        val qs = QuestionDb(path).getQuestions()
-        qs.forEach {
-            println("xxxxxxxxxxx questionId:" + it.questionId)
-        }
+        val dbHelper = DatabaseHelper(this)
+        dbPath = dbHelper.copyDatabaseFromAssets()
+        println("dbPath: $dbPath")
     }
 }
 
