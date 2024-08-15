@@ -3,8 +3,8 @@
 /package-lock.json
 libjk_core_question.a
 libjk_core_question.so
-/ports/ios/JkCoreQuestion/Sources/JkCoreQuestion/*
-/ports/ios/JkCoreQuestion/RustFramework.xcframework/*/Headers/*
+/app/ios/jk-core-question-example/JkCoreQuestion/Sources/JkCoreQuestion/*
+/app/ios/jk-core-question-example/JkCoreQuestion/RustFramework.xcframework/*/Headers/*
 /app/ohos/jk_core_question_example/jk_core_question/types/index.d.ts
 /app/android/jk-core-question-example/lib/src/main/java/*
 

@@ -16,7 +16,7 @@ else
     echo "Error: Too many arguments. Only --release is accepted"
 fi
 
-outdir=./ports/ios
+outdir=./app/ios/jk-core-question-example
 libname=jk_core_question
 static_libname=lib$libname.a
 dy_libname=lib$libname.dylib

@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D63DC4E52C6DFB0600E7A330 /* JkCoreQuestion in Frameworks */ = {isa = PBXBuildFile; productRef = D63DC4E42C6DFB0600E7A330 /* JkCoreQuestion */; };
 		D65D2C812C69F56E0035B673 /* car.db in Resources */ = {isa = PBXBuildFile; fileRef = D65D2C802C69F56E0035B673 /* car.db */; };
 		D6D3A8062C69BD4800496450 /* jk_core_question_exampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3A8052C69BD4800496450 /* jk_core_question_exampleApp.swift */; };
 		D6D3A8082C69BD4800496450 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3A8072C69BD4800496450 /* ContentView.swift */; };
 		D6D3A80A2C69BD4A00496450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3A8092C69BD4A00496450 /* Assets.xcassets */; };
 		D6D3A80D2C69BD4A00496450 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3A80C2C69BD4A00496450 /* Preview Assets.xcassets */; };
-		D6D3A8152C69BDC900496450 /* JkCoreQuestion in Frameworks */ = {isa = PBXBuildFile; productRef = D6D3A8142C69BDC900496450 /* JkCoreQuestion */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6D3A8152C69BDC900496450 /* JkCoreQuestion in Frameworks */,
+				D63DC4E52C6DFB0600E7A330 /* JkCoreQuestion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 			);
 			name = "jk-core-question-example";
 			packageProductDependencies = (
-				D6D3A8142C69BDC900496450 /* JkCoreQuestion */,
+				D63DC4E42C6DFB0600E7A330 /* JkCoreQuestion */,
 			);
 			productName = "jk-core-question-example";
 			productReference = D6D3A8022C69BD4800496450 /* jk-core-question-example.app */;
@@ -120,7 +120,7 @@
 			);
 			mainGroup = D6D3A7F92C69BD4800496450;
 			packageReferences = (
-				D6D3A8132C69BDC900496450 /* XCLocalSwiftPackageReference "../../../ports/ios/JkCoreQuestion" */,
+				D63DC4E32C6DFB0600E7A330 /* XCLocalSwiftPackageReference "JkCoreQuestion" */,
 			);
 			productRefGroup = D6D3A8032C69BD4800496450 /* Products */;
 			projectDirPath = "";
@@ -356,14 +356,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D6D3A8132C69BDC900496450 /* XCLocalSwiftPackageReference "../../../ports/ios/JkCoreQuestion" */ = {
+		D63DC4E32C6DFB0600E7A330 /* XCLocalSwiftPackageReference "JkCoreQuestion" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../../ports/ios/JkCoreQuestion;
+			relativePath = JkCoreQuestion;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D6D3A8142C69BDC900496450 /* JkCoreQuestion */ = {
+		D63DC4E42C6DFB0600E7A330 /* JkCoreQuestion */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = JkCoreQuestion;
 		};
