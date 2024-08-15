@@ -1,7 +1,0 @@
-{
-  "module": {
-    "name": "@mc/jk-core-question",
-    "type": "har",
-    "deviceTypes": ["default", "tablet", "2in1"]
-  },
-}

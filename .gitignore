@@ -5,8 +5,8 @@ libjk_core_question.a
 libjk_core_question.so
 /ports/ios/JkCoreQuestion/Sources/JkCoreQuestion/*
 /ports/ios/JkCoreQuestion/RustFramework.xcframework/*/Headers/*
-/ports/ohos/types/*
-/ports/android/lib/src/main/java/*
+/app/ohos/jk_core_question_example/jk_core_question/types/index.d.ts
+/app/android/jk-core-question-example/lib/src/main/java/*
 
 
 !.gitkeep

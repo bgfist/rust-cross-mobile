@@ -1,0 +1,58 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "0000001EF3915A8E50F34E7056EED1FBC9FFB5FA45D42450145367BDA710C1FC87948AD25B78CBA9C4BC5564DB5E",
+          "certpath": "AppScope/sign/default/mcoh_app_default.cer",
+          "keyAlias": "mcoh_sgin",
+          "keyPassword": "0000001EABB411E3CC6EC724478E5FA907343E2C2B30AFD1B66BE048F7FB6711FD4B01537E06D7C8BBD1D7B2F444",
+          "profile": "AppScope/sign/default/mcoh_profile_default.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "AppScope/sign/default/mcoh_keystore.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "bundleName": "cn.mucang.hm.jiakao",
+        "output": {
+          "artifactName": "jiakaobaodian"
+        },
+        "bundleType": "app"
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "jk_core_question",
+      "srcPath": "./jk_core_question",
+    }
+  ]
+}
