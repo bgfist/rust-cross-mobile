@@ -1,4 +1,5 @@
 use std::sync::Mutex;
+use std::time::Duration;
 
 use super::models::*;
 use crate::error::{error, Error};
@@ -68,4 +69,11 @@ impl QuestionDb {
             .ok();
         return Ok(q);
     }
+}
+
+#[cfg_attr(ffi_uniffi, uniffi::export(async_runtime = "tokio"))]
+#[napi]
+async fn test_async(seconds: u32) -> String {
+    tokio::time::sleep(Duration::from_secs(seconds as u64)).await;
+    "finished".to_owned()
 }

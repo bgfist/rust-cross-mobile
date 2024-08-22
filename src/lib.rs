@@ -56,3 +56,28 @@ mod error {
 }
 
 mod db;
+
+#[cfg(target_os = "android")]
+mod _inner_android {
+    static VM: once_cell::sync::OnceCell<jni::JavaVM> = once_cell::sync::OnceCell::new();
+
+    // need call this function in java/kotlin first
+    #[export_name = "Java_cn_mucang_android_jk_core_question_AsyncRt_initRuntime"]
+    pub extern "system" fn java_init(
+        env: jni::JNIEnv,
+        _class: jni::objects::JClass,
+        app: jni::objects::JObject,
+    ) {
+        let vm = env.get_java_vm().unwrap();
+        _ = VM.set(vm);
+
+        // take tokio for example, and we need to call uniffi's callback in the tokio worker threads -
+        tokio::runtime::Builder::new_multi_thread()
+            .on_thread_start(|| {
+                let vm = VM.get().expect("init java vm");
+                vm.attach_current_thread_permanently().unwrap();
+            })
+            .build()
+            .unwrap();
+    }
+}

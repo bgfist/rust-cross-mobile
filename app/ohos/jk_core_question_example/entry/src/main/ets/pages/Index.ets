@@ -3,7 +3,7 @@ import { relationalStore } from '@kit.ArkData';
 import { hash } from '@kit.CoreFileKit';
 import { TiKuUtils } from './TiKuUtils';
 import fs from '@ohos.file.fs';
-import { QuestionDb } from '@mc/jk_core_question';
+import { QuestionDb, testAsync } from '@mc/jk_core_question';
 
 @Entry
 @Component
@@ -44,6 +44,17 @@ struct Index {
             .margin({ top: 20 })
             .onClick(() => {
               this.rustReadDb()
+            })
+          
+          Button("4、rust测试异步方法")
+            .enabled(!!this.dbPath)
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20 })
+            .onClick(() => {
+              testAsync(2).then(res => {
+                this.copyResult = "异步方法返回: " + res;
+              })
             })
 
           Text(this.readBeforeResult)

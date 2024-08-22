@@ -31,4 +31,6 @@ android {
 dependencies {
     implementation libs.jna
     implementation libs.androidx.annotation
+    // Kotlin 协程核心库
+    implementation libs.kotlinx.coroutines.android // 使用最新版本
 }
