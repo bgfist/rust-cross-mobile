@@ -36,8 +36,11 @@ strip ./target/$target2/$mode/$static_libname
 arch3=x86_64
 target3=${arch3}-apple-ios
 cargo build --target $target3 $1
-# 生成的静态文件strip后会小很多
-strip ./target/$target3/$mode/$static_libname
+
+if [ "$mode" = "release" ]; then
+    # 生成的静态文件strip后会小很多
+    strip ./target/$target3/$mode/$static_libname
+fi
 
 framework_path=$outdir/JkCoreQuestion/RustFramework.xcframework
 universal_path=$framework_path/ios-arm64_x86_64-simulator/$static_libname

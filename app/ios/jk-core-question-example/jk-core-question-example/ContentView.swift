@@ -16,26 +16,34 @@ class Params {
 
 struct ContentView: View {
     var params: Params
+    // 使用@State创建一个可绑定的字符串变量
+    @State private var resultText = "结果"
     
     var body: some View {
         VStack {
-            Button("Query") {
+            Button("测试性能") {
                 self.params.checkTimes = 0
                 self.params.checkDuration = 0
+                resultText = "开始压测..."
                 self.checkQuestions()
             }
-            Button("Save") {
-                
+            Button("测试查询数据库") {
+                self.queryQuestionTitle()
             }
-            Button("Delete") {
-                
+            Button("测试异步方法") {
+                resultText = "等待结果中..."
+                Task {
+                    let asyncResult = await testAsync(seconds: 2)
+                    // 更新文本内容
+                    resultText = asyncResult
+                }
             }
-            Button("Request") {
-                
-            }
+            Text(resultText)
+                .font(.title3)
+                .padding()
         }
         .padding()
-    
+        
     }
     
     init(questionDb: QuestionDb? = nil, checkTimes: Int = 0, checkDuration: TimeInterval = 0) {
@@ -53,6 +61,14 @@ struct ContentView: View {
         self.params = params
     }
     
+    func queryQuestionTitle() {
+        if let questionDb = self.params.questionDb {
+            let result = try? questionDb.getQuestions()
+            if let result = result {
+                self.resultText = result[0].question
+            }
+        }
+    }
     
     func checkQuestions() {
         let maxTimes = 10
@@ -62,11 +78,12 @@ struct ContentView: View {
             //计算平均耗时
             let averageDuration = self.params.checkDuration / Double(self.params.checkTimes)
             print("平均耗时：\(averageDuration)")
+            resultText = "平均耗时：\(averageDuration)"
             return
         }
         
         var costTime: TimeInterval = 0
-            
+        
         if let questionDb = self.params.questionDb {
             let totalCount = 10000
             let startTime = Date.now.timeIntervalSince1970
@@ -81,15 +98,15 @@ struct ContentView: View {
             let endTime = Date.now.timeIntervalSince1970
             costTime = endTime - startTime
             print("第\(currentCheckTimes)轮，总共耗时：\(costTime)")
+            resultText = "第\(currentCheckTimes)轮，总共耗时：\(costTime)"
         }
-            
         self.params.checkTimes = currentCheckTimes
         self.params.checkDuration += costTime
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(1)) {
             self.checkQuestions()
         }
-       
+        
     }
 }
 
