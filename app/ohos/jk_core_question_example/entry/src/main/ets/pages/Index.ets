@@ -3,7 +3,8 @@ import { relationalStore } from '@kit.ArkData';
 import { hash } from '@kit.CoreFileKit';
 import { TiKuUtils } from './TiKuUtils';
 import fs from '@ohos.file.fs';
-import { QuestionDb, testAsync } from '@mc/jk_core_question';
+import { QuestionDb, testAsync, testNative } from '@mc/jk_core_question';
+import { promptAction } from '@kit.ArkUI'
 
 @Entry
 @Component
@@ -47,7 +48,6 @@ struct Index {
             })
           
           Button("4、rust测试异步方法")
-            .enabled(!!this.dbPath)
             .fontSize(18)
             .fontWeight(FontWeight.Bold)
             .margin({ top: 20 })
@@ -55,6 +55,14 @@ struct Index {
               testAsync(2).then(res => {
                 this.copyResult = "异步方法返回: " + res;
               })
+            })
+
+          Button("5、rust测试本地方法")
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20 })
+            .onClick(() => {
+              testNative({ showDialog: promptAction.showDialog });
             })
 
           Text(this.readBeforeResult)

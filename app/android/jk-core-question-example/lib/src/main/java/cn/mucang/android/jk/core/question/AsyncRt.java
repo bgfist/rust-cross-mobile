@@ -2,6 +2,7 @@ package cn.mucang.android.jk.core.question;
 
 public class AsyncRt {
     public static native void initRuntime();
+    public static native void testNative(android.content.Context ctx);
 
     static {
         System.loadLibrary("jk_core_question");

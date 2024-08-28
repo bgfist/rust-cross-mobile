@@ -3,10 +3,8 @@
 /package-lock.json
 libjk_core_question.a
 libjk_core_question.so
-/app/ios/jk-core-question-example/JkCoreQuestion/Sources/JkCoreQuestion/*
-/app/ios/jk-core-question-example/JkCoreQuestion/RustFramework.xcframework/*/Headers/*
+/app/ios/jk-core-question-example/JkCoreQuestion/Sources/JkCoreQuestion/jk_core_question.swift
+/app/ios/jk-core-question-example/JkCoreQuestion/RustFramework.xcframework/*/Headers/jk_core_questionFFI.h
+/app/ios/jk-core-question-example/JkCoreQuestion/RustFramework.xcframework/*/Headers/module.modulemap
 /app/ohos/jk_core_question_example/jk_core_question/types/index.d.ts
 /app/android/jk-core-question-example/lib/src/main/java/cn/mucang/android/jk/core/question/jk_core_question.kt
-
-
-!.gitkeep

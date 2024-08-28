@@ -30,6 +30,10 @@ tokio = { version = "1", features = ["full"] }
 
 [target.'cfg(target_os="ios")'.dependencies]
 libsqlite3-sys = { version = "0.28.0" }
+block2 = "0.5.1"
+objc2 = "0.5.2"
+objc2-foundation = { version = "0.2.2", features = ["all"] }
+objc2-ui-kit = { version = "0.2.2", features = ["all"] }
 
 [target.'cfg(not(target_os="ios"))'.dependencies]
 libsqlite3-sys = { version = "0.28.0", features = ["bundled"] }

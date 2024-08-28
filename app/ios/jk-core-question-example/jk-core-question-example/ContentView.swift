@@ -38,6 +38,14 @@ struct ContentView: View {
                     resultText = asyncResult
                 }
             }
+            Button("测试调用本地方法") {
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first,
+                   let hostingController = window.rootViewController {
+                    // 现在你有了UIHostingController的实例
+                    testNativeWrapper(ctx: hostingController)
+                }
+            }
             Text(resultText)
                 .font(.title3)
                 .padding()

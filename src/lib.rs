@@ -65,8 +65,7 @@ mod _inner_android {
     #[export_name = "Java_cn_mucang_android_jk_core_question_AsyncRt_initRuntime"]
     pub extern "system" fn java_init(
         env: jni::JNIEnv,
-        _class: jni::objects::JClass,
-        app: jni::objects::JObject,
+        _class: jni::objects::JClass
     ) {
         let vm = env.get_java_vm().unwrap();
         _ = VM.set(vm);
