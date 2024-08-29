@@ -3,8 +3,44 @@ uniffi::setup_scaffolding!();
 
 #[cfg(target_env = "ohos")]
 mod _napi_inner {
+    use std::ffi::c_char;
+    use std::ffi::CString;
+    use std::ptr;
+
     use napi::bindgen_prelude::*;
     use napi::module_init;
+
+    extern "C" {
+        pub fn napi_load_module(
+            env: sys::napi_env,
+            path: *const c_char,
+            result: *mut sys::napi_value,
+        ) -> sys::napi_status;
+        pub fn napi_load_module_with_info(
+            env: sys::napi_env,
+            path: *const c_char,
+            module_info: *const c_char,
+            result: *mut sys::napi_value,
+        ) -> sys::napi_status;
+    }
+
+    // FIXME: 两种加载模块的方法都没法加载华为的私有系统模块，只能加载openharmony的
+    pub(crate) fn load_module<V: FromNapiValue>(env: Env, path: &str) -> Result<V> {
+        let path = CString::new(path)?;
+        let mut raw_value = ptr::null_mut();
+        check_status!(unsafe { napi_load_module(env.raw(), path.as_ptr(), &mut raw_value) })?;
+        unsafe { V::from_napi_value(env.raw(), raw_value) }
+    }
+
+    // TODO: 这个方法其实用不到
+    pub(crate) fn load_sys_module<V: FromNapiValue>(env: Env, path: &str) -> Result<V> {
+        let path = CString::new(path)?;
+        let mut raw_value = ptr::null_mut();
+        check_status!(unsafe {
+            napi_load_module_with_info(env.raw(), path.as_ptr(), ptr::null(), &mut raw_value)
+        })?;
+        unsafe { V::from_napi_value(env.raw(), raw_value) }
+    }
 
     #[module_init]
     fn napi_register_module_v1_ohos_init() {
@@ -63,10 +99,7 @@ mod _inner_android {
 
     // need call this function in java/kotlin first
     #[export_name = "Java_cn_mucang_android_jk_core_question_AsyncRt_initRuntime"]
-    pub extern "system" fn java_init(
-        env: jni::JNIEnv,
-        _class: jni::objects::JClass
-    ) {
+    pub extern "system" fn java_init(env: jni::JNIEnv, _class: jni::objects::JClass) {
         let vm = env.get_java_vm().unwrap();
         _ = VM.set(vm);
 

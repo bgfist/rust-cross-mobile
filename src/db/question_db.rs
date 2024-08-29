@@ -181,11 +181,11 @@ mod _ios_native {
 
 #[cfg(target_env = "ohos")]
 mod _ohos_native {
-    use napi::{
-        bindgen_prelude::{Null, Object, Promise, Undefined},
-        Env, JsFunction, JsUnknown,
-    };
+    use napi::bindgen_prelude::*;
+    use napi::JsUnknown;
     use napi_derive::napi;
+
+    use crate::_napi_inner::load_module;
 
     #[napi]
     fn test_native(env: Env, obj: Object) {
@@ -194,5 +194,10 @@ mod _ohos_native {
         options.set("title", "警告").unwrap();
         options.set("message", "这是一个警告弹窗").unwrap();
         let _p: Promise<JsUnknown> = func.apply1(Null, options).unwrap();
+
+        let hilog = load_module::<Object>(env, "@ohos.hilog").unwrap();
+        let hilog_debug = hilog.get::<_, JsFunction>("debug").unwrap().unwrap();
+        //  function debug(domain: number, tag: string, format: string, ...args: any[]): void;
+        let _p: Undefined = hilog_debug.apply3(Null, 0x01, "[rust动态库]", "成功展示鸿蒙弹窗").unwrap();
     }
 }
