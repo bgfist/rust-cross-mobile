@@ -3,7 +3,7 @@ import { relationalStore } from '@kit.ArkData';
 import { hash } from '@kit.CoreFileKit';
 import { TiKuUtils } from './TiKuUtils';
 import fs from '@ohos.file.fs';
-import { QuestionDb, testAsync, testNative } from '@mc/jk_core_question';
+import { QuestionDb, testAsync, testNative, testNetwork } from '@mc/jk_core_question';
 import { promptAction } from '@kit.ArkUI'
 
 @Entry
@@ -46,12 +46,13 @@ struct Index {
             .onClick(() => {
               this.rustReadDb()
             })
-          
+
           Button("4、rust测试异步方法")
             .fontSize(18)
             .fontWeight(FontWeight.Bold)
             .margin({ top: 20 })
             .onClick(() => {
+              this.copyResult = "等待结果中...";
               testAsync(2).then(res => {
                 this.copyResult = "异步方法返回: " + res;
               })
@@ -63,6 +64,19 @@ struct Index {
             .margin({ top: 20 })
             .onClick(() => {
               testNative({ showDialog: promptAction.showDialog });
+            })
+
+          Button("6、rust测试网络请求")
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20 })
+            .onClick(() => {
+              this.copyResult = "等待结果中...";
+              testNetwork().then(res => {
+                this.copyResult = "异步方法返回: " + res;
+              }, (err: Error) => {
+                this.copyResult = err.toString();
+              });
             })
 
           Text(this.readBeforeResult)

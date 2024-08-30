@@ -57,6 +57,17 @@ mod _napi_inner {
             napi::sys::napi_module_register(&mut modules);
         }
     }
+
+    /// 鸿蒙的openssl证书检测有问题，这里手动检测下
+    #[module_init]
+    fn probe_ssl_ca_cert() {
+        // 鸿蒙的ca证书路径为/etc/ssl/certs/cacert.pem
+        std::env::set_var(
+            "SSL_CERT_FILE",
+            std::path::Path::new("/etc/ssl/certs/cacert.pem"),
+        );
+        std::env::set_var("SSL_CERT_DIR", std::path::Path::new("/etc/ssl/certs"));
+    }
 }
 
 #[cfg(not(ffi_napi))]

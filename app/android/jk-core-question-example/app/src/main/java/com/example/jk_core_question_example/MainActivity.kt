@@ -21,6 +21,7 @@ import cn.mucang.android.jk.core.question.AsyncRt
 import cn.mucang.android.jk.core.question.AsyncRt.testNative
 import cn.mucang.android.jk.core.question.QuestionDb
 import cn.mucang.android.jk.core.question.testAsync
+import cn.mucang.android.jk.core.question.testNetwork
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -65,6 +66,17 @@ class MainActivity : ComponentActivity() {
                             }
                         ) {
                             Text("测试本地方法")
+                        }
+                        Button(
+                            modifier = Modifier.padding(innerPadding),
+                            onClick = {
+                                lifecycleScope.launch {
+                                    val res = testNetwork()
+                                    resultText.value = res;
+                                }
+                            }
+                        ) {
+                            Text("测试网络请求")
                         }
                         Text(text = resultText.value)
                     }

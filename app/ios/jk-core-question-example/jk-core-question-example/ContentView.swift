@@ -46,6 +46,14 @@ struct ContentView: View {
                     testNativeWrapper(ctx: hostingController)
                 }
             }
+            Button("测试网络请求") {
+                resultText = "等待结果中..."
+                Task {
+                    let asyncResult = try await testNetwork()
+                    // 更新文本内容
+                    resultText = asyncResult
+                }
+            }
             Text(resultText)
                 .font(.title3)
                 .padding()

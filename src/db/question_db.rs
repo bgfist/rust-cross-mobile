@@ -78,6 +78,27 @@ async fn test_async(seconds: u32) -> String {
     "finished".to_owned()
 }
 
+#[cfg_attr(ffi_uniffi, uniffi::export(async_runtime = "tokio"))]
+#[napi]
+async fn test_network() -> Result<String, Error> {
+    async fn request() -> reqwest::Result<String> {
+        let client = reqwest::ClientBuilder::new()
+            .connect_timeout(Duration::from_secs(3))
+            .build()?;
+        client
+            .get("https://www.baidu.com/")
+            .send()
+            .await?
+            .text()
+            .await
+    }
+
+    let res = request().await;
+
+    res.map_err(|e| error(&format!("{:?}", e)))
+        .map(|resp| resp.chars().take(50).collect())
+}
+
 #[cfg(target_os = "android")]
 mod _android_native {
     use jni::objects::{JClass, JObject, JValue};
@@ -198,6 +219,8 @@ mod _ohos_native {
         let hilog = load_module::<Object>(env, "@ohos.hilog").unwrap();
         let hilog_debug = hilog.get::<_, JsFunction>("debug").unwrap().unwrap();
         //  function debug(domain: number, tag: string, format: string, ...args: any[]): void;
-        let _p: Undefined = hilog_debug.apply3(Null, 0x01, "[rust动态库]", "成功展示鸿蒙弹窗").unwrap();
+        let _p: Undefined = hilog_debug
+            .apply3(Null, 0x01, "[rust动态库]", "成功展示鸿蒙弹窗")
+            .unwrap();
     }
 }
