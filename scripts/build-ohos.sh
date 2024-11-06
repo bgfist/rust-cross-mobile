@@ -16,13 +16,14 @@ else
     echo "Error: Too many arguments. Only --release is accepted"
 fi
 
+ohosLlvm=/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/native/llvm/bin
 arch=aarch64
 outdir=./app/ohos/jk_core_question_example/jk_core_question/types
 
-export CC="$HOME/${arch}-unknown-linux-ohos-clang.sh"
-export CXX="$HOME/${arch}-unknown-linux-ohos-clang++.sh"
-export AR="$HOME/Library/Huawei/Sdk/openharmony/9/native/llvm/bin/llvm-ar"
-export RANLIB="$HOME/Library/Huawei/Sdk/openharmony/9/native/llvm/bin/llvm-ranlib"
+export CC="$ohosLlvm/${arch}-unknown-linux-ohos-clang"
+export CXX="$ohosLlvm/${arch}-unknown-linux-ohos-clang++"
+export AR="$ohosLlvm/llvm-ar"
+export RANLIB="$ohosLlvm/llvm-ranlib"
 
 npx napi build $outdir --target ${arch}-unknown-linux-ohos $1
 rm -f $outdir/index.node
