@@ -4,6 +4,7 @@ use std::time::Duration;
 use super::models::*;
 use crate::error::{error, Error};
 use diesel::prelude::*;
+use diesel::sql_types::Integer;
 use diesel::sqlite::SqliteConnection;
 use napi_derive::napi;
 
@@ -67,6 +68,32 @@ impl QuestionDb {
             .select(Question::as_select())
             .first(conn)
             .ok();
+        return Ok(q);
+    }
+
+    fn get_exam_regular_chapter_ids(&self) -> Result<Vec<i32>, Error> {
+        access_mutex_field!(self, conn);
+
+        use super::schema::t_exam_regular_scene_rel::dsl::*;
+
+        let q = t_exam_regular_scene_rel
+            .filter(course.eq("kemu1"))
+            .filter(scene_code.eq("101"))
+            .select(chapter_id)
+            .load::<Integer>(conn)
+            .unwrap();
+
+        if q.len() > 0 {
+            return Ok(q);
+        }
+
+        let q = t_exam_regular_scene_rel
+            .filter(course.eq("kemu1"))
+            .filter(scene_code.eq("101"))
+            .select(chapter_id)
+            .load::<Integer>(conn)
+            .unwrap();
+
         return Ok(q);
     }
 }
